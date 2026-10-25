@@ -1,0 +1,11 @@
+{
+  "name": "zeromark",
+  "version": "1.0.0",
+  "description": "Read your saved X posts and your ZeroMark Living Memory from Gemini CLI. Read-only.",
+  "mcpServers": {
+    "zeromark": {
+      "httpUrl": "https://www.zeromark.io/api/mcp"
+    }
+  },
+  "contextFileName": "GEMINI.md"
+}

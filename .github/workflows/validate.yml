@@ -1,0 +1,50 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "17 9 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  extension:
+    if: github.event_name != 'schedule'
+    name: Extension manifest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Manifest parses and names its server
+        run: |
+          node -e '
+            const m = JSON.parse(require("fs").readFileSync("gemini-extension.json", "utf8"));
+            for (const k of ["name", "version", "description", "mcpServers", "contextFileName"]) if (!m[k]) throw new Error("missing " + k);
+            if (m.mcpServers.zeromark.httpUrl !== "https://www.zeromark.io/api/mcp") throw new Error("unexpected server URL");
+            if (!require("fs").existsSync(m.contextFileName)) throw new Error("context file missing");
+            console.log("ok", m.name, m.version);
+          '
+      - name: Gemini CLI accepts it
+        run: npx --yes @google/gemini-cli extensions validate .
+
+  server:
+    name: Server is reachable
+    # The live server, not this repository: checked weekly and on demand, never as a gate on a pull request.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Protected resource metadata answers
+        run: curl -fsS https://www.zeromark.io/.well-known/oauth-protected-resource/api/mcp | grep -q '"resource"'
+      - name: An unsigned call is refused with a challenge
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' -X POST https://www.zeromark.io/api/mcp \
+            -H 'content-type: application/json' -H 'accept: application/json, text/event-stream' \
+            -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}')
+          echo "status $code"
+          test "$code" = "401"
