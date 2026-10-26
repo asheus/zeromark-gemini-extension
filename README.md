@@ -4,7 +4,7 @@
 
 # ZeroMark for Gemini CLI
 
-**Your taste from X, in Gemini: what you kept, what you let go, what you concluded.**
+**Your taste in X, in Gemini: what you kept, what you let go, what you concluded.**
 
 [![Validate](https://github.com/asheus/zeromark-gemini-extension/actions/workflows/validate.yml/badge.svg)](https://github.com/asheus/zeromark-gemini-extension/actions/workflows/validate.yml)
 [![Gemini CLI extension](https://img.shields.io/badge/Gemini_CLI-extension-4285F4?style=flat-square&logo=googlegemini&logoColor=white)](#install)
@@ -20,7 +20,7 @@
 
 **Other connectors give your AI what you saved. ZeroMark gives it what you decided.**
 
-[ZeroMark](https://www.zeromark.io) reads every post you bookmarked on X, and you clear the pile one decision at a time: Done or Let go. What you keep becomes your **Living Memory**, notes in your own words that change as you do. A pile of 3,000 bookmarks only says what you hoped to read; your decisions say what you actually think. That is what your assistant reads here, read-only: it never decides for you.
+[ZeroMark](https://www.zeromark.io) reads every post you bookmarked on X, and you clear the pile one decision at a time: Done or Let go. What you keep becomes your **Living Memory**, notes in your own words that change as you do. A pile of 3,000 bookmarks only says what you hoped to read; your decisions say what you actually think. That is your taste in X, and that is what your assistant reads here, read-only: it never decides for you.
 
 This extension connects [Gemini CLI](https://github.com/google-gemini/gemini-cli) to ZeroMark's hosted MCP server, `https://www.zeromark.io/api/mcp`, and adds a `GEMINI.md` context file that tells Gemini how to use it well.
 
@@ -40,6 +40,10 @@ gemini extensions install https://github.com/asheus/zeromark-gemini-extension
 ```
 
 Start `gemini` and ask something about your saves. The first call opens ZeroMark's sign-in in your browser; approve read-only access and Gemini carries on. Run `/mcp` to see the server and its tools.
+
+**Check it worked:** ask Gemini which ZeroMark tools it has. It should list eleven: `search_saves`, `get_save`, `list_by_stage`, `library_overview`, `get_memory`, `search`, `fetch`, `get_taste`, `get_map`, `get_podcast` and `weekly_question`. If they are missing, run `/mcp auth zeromark` and sign in again.
+
+**Or let Gemini set it up without the extension:** paste `Set up ZeroMark for me by following https://www.zeromark.io/docs/connector/agent-setup.md`. It adds the server to `~/.gemini/settings.json` after showing you the change, installs nothing and never asks for a key in chat.
 
 To update or remove it:
 
@@ -75,11 +79,11 @@ Use the companion marketplace: [`asheus/zeromark-plugins`](https://github.com/as
 
 ## Tools
 
-Eleven tools, all read-only. None of them can mark a save Done, let it go, edit, delete, or touch your X account. You decide; your assistant reads what you decided.
+Eleven tools, all read-only. None of them can mark a save Done, let it go, edit, delete, or touch your X account. You decide; your assistant reads your taste in X.
 
 | Tool | What it does |
 | --- | --- |
-| `get_taste` | What you decided, one save at a time: kept and let go per field and per voice, what you let go lately, and what your notes stopped believing, with dates. Nothing a model inferred. |
+| `get_taste` | Your taste in X: what you decided, one save at a time. Kept and let go per field and per voice, what you let go lately, and what your notes stopped believing, with dates. Nothing a model inferred. The unread pile is not taste. |
 | `library_overview` | Counts by stage and field, how many decisions you have made, and how many Living Memory notes you have. A good first call. |
 | `search_saves` | Search your saves by meaning and by words, with optional `status`, `since` and `until` filters. Up to 25 a page. |
 | `get_save` | One save in full, by its id, its x.com URL or its post id, with who decided it and when. |

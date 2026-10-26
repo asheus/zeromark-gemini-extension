@@ -4,6 +4,12 @@ All notable changes to this extension are recorded here. The format follows [Kee
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-10-26
+
+### Changed
+
+- Say "taste in X". The install section includes the agent setup line and the eleven-tool check.
+
 ## [1.1.0] - 2026-10-25
 
 ### Added
@@ -17,6 +23,7 @@ All notable changes to this extension are recorded here. The format follows [Kee
 
 - `GEMINI.md` leads with the reader's decisions, says how many an answer rests on, and never recommends back what they let go without saying so.
 - `weekly_question` is described as a suggestion: the reader decides.
+- The README opens with a line to paste into your agent so it sets the connector up for you ("Set up ZeroMark for me by following https://www.zeromark.io/docs/connector/agent-setup.md"), and ends the install with a check: the eleven tools your assistant should list.
 - README, banner and descriptions say what the connector is for: other connectors give your AI what you saved; ZeroMark gives it what you decided.
 
 ## [1.0.0] - 2026-10-25
@@ -27,6 +34,7 @@ All notable changes to this extension are recorded here. The format follows [Kee
 - Eight read-only tools: `library_overview`, `search_saves`, `get_save`, `list_by_stage`, `get_memory`, `weekly_question`, `search` and `fetch`.
 - `GEMINI.md`, which tells Gemini which tool fits which question and how to cite saves.
 
-[Unreleased]: https://github.com/asheus/zeromark-gemini-extension/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/asheus/zeromark-gemini-extension/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/asheus/zeromark-gemini-extension/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/asheus/zeromark-gemini-extension/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/asheus/zeromark-gemini-extension/releases/tag/v1.0.0

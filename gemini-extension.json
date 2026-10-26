@@ -1,7 +1,7 @@
 {
   "name": "zeromark",
-  "version": "1.1.0",
-  "description": "Your taste from X, in Gemini CLI: what you kept, let go and concluded in ZeroMark. Read-only.",
+  "version": "1.1.1",
+  "description": "Your taste in X, in Gemini CLI: what you kept, let go and concluded in ZeroMark. Read-only.",
   "mcpServers": {
     "zeromark": {
       "httpUrl": "https://www.zeromark.io/api/mcp"
